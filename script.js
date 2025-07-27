@@ -18,12 +18,9 @@ searchBtn.addEventListener("click", async () => {
 
         document.querySelector(".input-section").classList.add("hidden");
 
-        document.querySelector(".section").style.removeProperty("justify-content");
-        document.querySelector("header").style.marginTop = "";
-
         display.innerHTML = `
         <div class="userInfo"> 
-            <img src="${user.titlePhoto}" alt="User Avatar" />
+            <img src="${user.titlePhoto}" alt="User Avatar" id="userpf"/>
             <p><strong>Name:</strong> ${capitalizeWords(user.firstName)} ${capitalizeWords(user.lastName) || "N/A"}</p>
             <p><strong>Username:</strong> <a href="https://codeforces.com/profile/${user.handle}" target="_blank">${user.handle}</a></p>
             <p><strong>Country:</strong> ${capitalizeWords(user.city)}, ${capitalizeWords(user.country) || "N/A"}</p>
@@ -35,6 +32,13 @@ searchBtn.addEventListener("click", async () => {
             <p><strong>Contribution:</strong> ${user.contribution}</p>
         </div>
         `;
+
+        document.querySelector("#searchAgainBtn").classList.remove("hidden");
+        document.querySelector("#searchAgainBtn").addEventListener("click", () => {
+            display.innerHTML = "";
+            document.querySelector("#searchAgainBtn").classList.add("hidden");
+            document.querySelector(".input-section").classList.remove("hidden");
+        });
 
     } catch (error) {
         console.error("Error fetching data:", error);
